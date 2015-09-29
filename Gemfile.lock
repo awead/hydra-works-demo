@@ -329,11 +329,18 @@ GEM
       railties (>= 4.2.0, < 5)
     rsolr (1.0.12)
       builder (>= 2.1.2)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.3.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
@@ -417,6 +424,8 @@ DEPENDENCIES
   jquery-rails
   rails (= 4.2.3)
   rsolr (~> 1.0.6)
+  rspec
+  rspec-its
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
