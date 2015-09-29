@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'active_fedora/cleaner'
+require 'support/fixtures'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -51,37 +52,10 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.include Fixtures
+
   config.before(:all) do
     ActiveFedora::Cleaner.clean!
     load_examples
   end
-end
-
-def load_examples
-  Collection.create(id: 'col-1').tap do |c|
-    c.title = "Works by Edgar Allan Poe"
-    c.save
-  end
-  BibliographicWork.create(id: 'work-1').tap do |w|
-    w.title    = "The Raven"
-    w.author   = "Poe, Edgar Allan"
-    w.abstract = "A lonely man tries to ease his 'sorrow for the lost Lenore', by distracting his mind with old books of 'forgotten lore'."
-    w.save
-  end
-  BibliographicFile.create(id: 'gfile-1').tap do |f|
-    f.title = "The Raven pdf"
-    f.save
-  end
-end
-
-def collection
-  Collection.find("col-1")
-end
-
-def work
-  BibliographicWork.find("work-1")
-end
-
-def file
-  BibliographicFile.find("gfile-1")
 end
