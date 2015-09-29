@@ -1,10 +1,5 @@
 describe "Relationships" do
 
-  before(:all) do
-    collection.generic_works << work
-    work.generic_files << file
-  end
-
   context "with objects" do
     specify { expect(collection.generic_works).to contain_exactly(work) }
     specify { expect(work.in_collections).to contain_exactly(collection) }

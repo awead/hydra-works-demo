@@ -15,6 +15,8 @@ module Fixtures
       f.title = "The Raven pdf"
       f.save
     end
+    collection.generic_works << work
+    work.generic_files << file
   end
 
   def collection
