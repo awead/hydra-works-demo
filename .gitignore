@@ -51,3 +51,4 @@ build/
 /log/*
 !/log/.keep
 /tmp
+jetty
