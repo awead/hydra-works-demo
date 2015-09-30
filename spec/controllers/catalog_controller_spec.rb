@@ -6,7 +6,7 @@ describe CatalogController do
     describe "exclude infrastructure objects" do
       before { get :index, q: '' }
       subject { response.documents }
-      its(:count) { is_expected.to eq(3) }
+      its(:count) { is_expected.to eq(5) }
     end
 
     describe "using terms" do

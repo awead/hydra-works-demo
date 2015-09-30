@@ -15,8 +15,21 @@ module Fixtures
       f.title = "The Raven pdf"
       f.save
     end
+    ::PageFile.create(id: 'page-1').tap do |p|
+      p.page_number = 1
+      p.text = "Once upon a midnight dreary..."
+      p.save
+    end
+    ::PageFile.create(id: 'page-2').tap do |p|
+      p.page_number = 2
+      p.text = "The End"
+      p.save
+    end
     collection.generic_works << work
     work.generic_files << file
+    work.generic_files << page1
+    work.generic_files << page2
+
   end
 
   def collection
@@ -29,6 +42,14 @@ module Fixtures
 
   def file
     ::BibliographicFile.find("gfile-1")
+  end
+
+  def page1
+    ::PageFile.find('page-1')
+  end
+
+  def page2
+    ::PageFile.find('page-2')
   end
 
 end

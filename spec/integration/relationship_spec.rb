@@ -3,8 +3,9 @@ describe "Relationships" do
   context "with objects" do
     specify { expect(collection.generic_works).to contain_exactly(work) }
     specify { expect(work.in_collections).to contain_exactly(collection) }
-    specify { expect(work.generic_files).to contain_exactly(file) }
+    specify { expect(work.generic_files).to contain_exactly(file, page1, page2) }
     specify { expect(file.in_generic_works).to contain_exactly(work) }
+    specify { expect(work.pages).to contain_exactly(page1, page2) }
   end
 
   context "with solr" do
@@ -19,7 +20,7 @@ describe "Relationships" do
     end
     describe "work" do
       subject { work.to_solr }
-      its(['object_ids_ssim']) { is_expected.to contain_exactly('gfile-1') }
+      its(['object_ids_ssim']) { is_expected.to contain_exactly('gfile-1', 'page-1', 'page-2') }
       it { is_expected.not_to have_key('member_ids_ssim') }
       it { is_expected.not_to have_key('collection_ids_ssim') }
       xit { is_expected.to have_key('first_ssim') }

@@ -5,4 +5,7 @@ class BibliographicFile < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  def page?
+    false
+  end
 end
