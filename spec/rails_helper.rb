@@ -58,4 +58,6 @@ RSpec.configure do |config|
     ActiveFedora::Cleaner.clean!
     load_examples
   end
+
+  config.include Devise::TestHelpers, type: :controller
 end
