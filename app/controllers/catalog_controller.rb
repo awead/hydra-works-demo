@@ -14,7 +14,7 @@ class CatalogController < ApplicationController
     config.search_builder_class = Hydra::SearchBuilder
     config.default_solr_params = {
       :qf => 'title_tesim author_tesim abstract_tesim',
-      :fq => '-has_model_ssim:"ActiveFedora::IndirectContainer"-has_model_ssim:"ActiveFedora::Aggregation::Proxy"',
+      :fq => '-has_model_ssim:"ActiveFedora::IndirectContainer"-has_model_ssim:"ActiveFedora::Aggregation::Proxy"-has_model_ssim:"ActiveFedora::DirectContainer"-has_model_ssim:"PageFile"',
       :qt => 'search',
       :rows => 10
     }

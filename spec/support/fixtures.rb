@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Fixtures
 
   def load_examples
@@ -29,7 +31,14 @@ module Fixtures
     work.generic_files << file
     work.generic_files << page1
     work.generic_files << page2
-
+    add_content_to_page(
+      page1,
+      open("https://github.com/projecthydra-labs/hydra-works/wiki/raven_files/TheRaven_page1.pdf","r")
+    )
+    add_content_to_page(
+      page2,
+      open("https://github.com/projecthydra-labs/hydra-works/wiki/raven_files/TheRaven_page2.pdf","r")
+    )
   end
 
   def collection
@@ -50,6 +59,18 @@ module Fixtures
 
   def page2
     ::PageFile.find('page-2')
+  end
+
+  def add_content_to_page(pf, source)
+    Hydra::Works::UploadFileToGenericFile.call(pf, source)
+    pf.save
+    f1 = pf.files.first
+    f1.mime_type = 'application/pdf'
+    Hydra::Works::GenerateThumbnail.call(pf)
+    extracted_text = Hydra::Works::FullTextExtractionService.run(pf)
+    pf.build_extracted_text
+    pf.extracted_text.content = extracted_text
+    pf.save
   end
 
 end
